@@ -11,6 +11,18 @@
 	\item Assume that decision attribute is binary
 	\item Hyperplane: plane that separates positive and negative instances in dataset
 	\item Support vectors: data points (actual instances) that define the hyperplane and maximizes the distance between the hyperplane and support vectors
-	\item 
+	\item Example:
+		\begin{itemize}
+			\item Let support vectors be $s_1$, $s_2$, $s_3$ and the decision attribute for each be $d_1$, $d_2$, $d_3$
+			\item $\alpha_1 \phi(s_1) \dot \phi(s_1) + \alpha_2 \phi(s_2) \dot \phi(s_1) + \alpha_3 \phi(s_3) \dot \phi(s_1) = d_1$
+			\item $\alpha_1 \phi(s_1) \dot \phi(s_2) + \alpha_2 \phi(s_2) \dot \phi(s_2) + \alpha_3 \phi(s_3) \dot \phi(s_2) = d_1$
+			\item $\alpha_1 \phi(s_1) \dot \phi(s_1) + \alpha_2 \phi(s_2) \dot \phi(s_3) + \alpha_3 \phi(s_3) \dot \phi(s_3) = d_1$
+			\item Solve for $\alpha_1$, $\alpha_2$, $\alpha_3$
+			\item Hyperplane is $w' = \alpha_1 s_1 + \alpha_2 s_2 + \alpha_3 s_3$
+			\item $\phi$ is the identity function for a linear SVM (i.e.\ the hyperplane is a linear plane/line)
+			
+		\end{itemize}
+	\end{itemize}
 
 \end{document}
+
