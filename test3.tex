@@ -50,5 +50,33 @@
 		\end{itemize}
 \end{itemize}
 
+\subsection{Bayesian Networks}
+\begin{itemize}
+	\item Probabilistic model representing random variables and the relationships between them in a DAG.
+	\item Disconnected nodes are independent
+	\item Each node is a probability function that takes as inputs the values of its parent nodes
+	\item Node interpreted as: What is the probability of this node being true, given that parent1, parent2, \ldots have particular values?
+	\item $P(G = T | R = T) = \frac{P(G = T) P(R = T)}{P(G = T)}$
+	\item Bayes' Rule: $P(H | E) = \frac{P(E | H) P(H)}{P(E)}$
+	\item TODO: Laplace Estimation
+	\item TODO: Probability Calculation
+	\item Categorizing a new instance:
+		\begin{itemize}
+			\item Calculate probability for each node based on instance values
+			\item Calculate probability of each possible decision attribute value based on node values
+			\item Normalize resulting probabilities ($P(this) / \sum P(each\ value)$)
+		\end{itemize}
+	\item Prior Knowledge Algorithm: Adding edges to Bayesian Networks
+		\begin{itemize}
+			\item Let $T = (X_1, X_2, \cdots, X_n)$ be an ordering of attributes
+			\item For $j = 1 to n$:
+			\item Let $S = T[1 to j - 1]$ (the attributes that precede $T[j]$)
+			\item Remove attributes from $S$ that do not affect $T[j]$ based on prior/domain-specific Knowledge
+			\item Create an edge from every element in $S$ to $T[j]$
+		\end{itemize}
+	\item K2: DUN DUN DUN
+
+\end{itemize}
+
 \end{document}
 
