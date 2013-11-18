@@ -14,15 +14,41 @@
 	\item Example:
 		\begin{itemize}
 			\item Let support vectors be $s_1$, $s_2$, $s_3$ and the decision attribute for each be $d_1$, $d_2$, $d_3$
-			\item $\alpha_1 \phi(s_1) \dot \phi(s_1) + \alpha_2 \phi(s_2) \dot \phi(s_1) + \alpha_3 \phi(s_3) \dot \phi(s_1) = d_1$
-			\item $\alpha_1 \phi(s_1) \dot \phi(s_2) + \alpha_2 \phi(s_2) \dot \phi(s_2) + \alpha_3 \phi(s_3) \dot \phi(s_2) = d_1$
-			\item $\alpha_1 \phi(s_1) \dot \phi(s_1) + \alpha_2 \phi(s_2) \dot \phi(s_3) + \alpha_3 \phi(s_3) \dot \phi(s_3) = d_1$
+			\item $\alpha_1 \phi(s_1) \bullet \phi(s_1) + \alpha_2 \phi(s_2) \bullet \phi(s_1) + \alpha_3 \phi(s_3) \bullet \phi(s_1) = d_1$
+			\item $\alpha_1 \phi(s_1) \bullet \phi(s_2) + \alpha_2 \phi(s_2) \bullet \phi(s_2) + \alpha_3 \phi(s_3) \bullet \phi(s_2) = d_1$
+			\item $\alpha_1 \phi(s_1) \bullet \phi(s_1) + \alpha_2 \phi(s_2) \bullet \phi(s_3) + \alpha_3 \phi(s_3) \bullet \phi(s_3) = d_1$
 			\item Solve for $\alpha_1$, $\alpha_2$, $\alpha_3$
 			\item Hyperplane is $w' = \alpha_1 s_1 + \alpha_2 s_2 + \alpha_3 s_3$
 			\item $\phi$ is the identity function for a linear SVM (i.e.\ the hyperplane is a linear plane/line)
-			
 		\end{itemize}
-	\end{itemize}
+	\item $\phi$
+		\begin {itemize}
+		  \item TODO: read the book and pull more clear info from it for this section
+			\item Allows mapping from nonlinear ``input space'' to linear ``feature space'' where we perform the classification
+			\item Find a ``kernel function'' to transform (possibly higher dimesionality data) into a space such that it is better structured (and thus more easily classified)
+			\item ``Kernel Trick'': use a kernel function instead of bullet product between vectors
+			\item Example kernel functions:
+				\begin{itemize}
+					\item Polynomial Learning Machine: $K(x, y) = (x \bullet y + 1) ^ p$
+					\item Radial-Basis Function (or Gaussian) Network: $K(x, y) = \frac {exp\{-||x - y||^2\}} {2\sigma^2}$
+					\item Sigmoid (or Neural Net Activation) Network: $K(x, y) = tanh(\kappa x \bullet y - \delta)$
+				\end{itemize}
+		\end{itemize}
+	\item Classifying new instances:
+		\begin{itemize}
+			\item Let $v$ be the new vector to classify
+			\item Let $n$ = \# support vectors
+			\item Let \begin{displaymath} 
+					\sigma(x) = \left\{
+					\begin{array}{lr}
+						positive & : x >= 0 \\
+						negative & : x < 0
+					\end{array}
+					\right.
+				\end{displaymath}
+			\item Compute $f(v) = \sigma(\sum_{i=1}^{n} \alpha_i \phi(s_i) \bullet \phi(v) )$
+		\end{itemize}
+\end{itemize}
 
 \end{document}
 
