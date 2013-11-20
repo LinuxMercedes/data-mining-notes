@@ -74,8 +74,23 @@
 			\item Remove attributes from $S$ that do not affect $T[j]$ based on prior/domain-specific Knowledge
 			\item Create an edge from every element in $S$ to $T[j]$
 		\end{itemize}
-	\item K2: DUN DUN DUN
+	\item K2: Adding edges to Bayesian Networks
+		\begin{itemize}
+			\item Process each node in order and greedily considers adding edges from previously processed nodes to current node.
+			\item In each step, add the edges that maximize the node's score, optionally limiting to a set number of parents
+			\item Dependent on initial ordering of nodes, so running on different orderings is recommended
+			\item Score for node $i$: 
+				\begin{itemize}
+					\item Let $\pi_i$ be the parents of node $A$i
+					\item Let $\theta_i$ be all attribute-value pairs in $\pi_i$
+					\item Let $\alpha_{ijk}$ be the number of instances where attribute $x_i$ has value $V_i[k]$ and the attributes in $\pi_i$ have the values in $\theta_i[j]$
+					\item Let $N_{ij}$ be the sum of the number of instances that have values matching an entry in $\theta_i$
+					\item If $\theta_i = \emptyset$, $N_{ij} = \sum_{k=1}^{|V_i|} \alpha_{ijk}$
+					\item $f(i, \pi_i) = \prod_{j=1}^{|\theta_i|} 	\frac{(|V_i| - 1)!}{N_{ij} + |V_i| - 1)!} \prod_{k=1}^{|V_i|} \alpha_{ijk}! $
+				\end{itemize}
+		\end{itemize}
 
+		
 \end{itemize}
 
 \end{document}
