@@ -160,5 +160,30 @@
 		\end{itemize}
 \end{itemize}
 
+\subsection{Ensemble Methods}
+\begin{itemize}
+	\item Variance: Model's accuracy error rate due to the training data set
+	\item Bias: Model's accuracy error rate due to the classification method
+	\item Bias-Variance Decomposition: Bias + Variance
+	\item Work based on training several classifiers on different training datasets
+	\item Bagging (Bootstrap Aggregating):
+		\begin{itemize}
+			\item Train $k$ classifiers
+			\item Each classifier trains on dataset of size $N$, each element chosen with replacement from the dataset
+			\item $N$ is usually 63\% of $|D|$
+		\end{itemize}
+	\item Boosting: Adaptively change training instance distribution to better classify hard instances
+		\begin{itemize}
+			\item Each instance has a weight; if it is misclassified, weight increases, otherwise weight decreases.
+			\item Initial weight $w_j = 1/N$
+			\item $e_i$ = weighted error for classifier $C_i$
+			\item If $e_i \geq 0.5$, the error rate is terrible and we reset the weights
+			\item $\alpha_i = 0.5 * ln( (1 - e_i) / e_i)$
+			\item $Z_j$ is a factor to ensure $\sum_{j=1}^{N} w_j = 1$
+			\item If classified correctly, $w_j = (w_j / Z_j) * e ^ {-\alpha_i}$
+			\item If not, $w_j = (w_j / Z_j) * e ^ {+\alpha_i}$
+		\end{itemize}
+	\item Stacking: Like bagging and boosting, but works with different types of classifiers
+\end{itemize}
 \end{document}
 
