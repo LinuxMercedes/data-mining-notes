@@ -98,9 +98,23 @@
 	\item Scoring Bayesian Networks:
 		\begin{itemize}
 			\item Maximum Likelyhood Criterion (bigger is better): $\sum_{i=1}^{attributes}\sum_{j=1}^{|\theta_i|}\sum_{k=1}^{|V_i|} \alpha_{ijk} log \frac{\alpha_{ijk}}{N_ {ij}}$
-			\item Akaike Information Criterion (smaller is better): $MLC - #paramenters$
-			\item Bayesion Information Criterion (bigger is better): $MLC - 0.5 * log_2(#instances) * #parameters$
+			\item Akaike Information Criterion (smaller is better): $MLC - \#paramenters$
+			\item Bayesion Information Criterion (bigger is better): $MLC - 0.5 * log_2(\#instances) * \#parameters$
 			\item Minimum Description Length (smaller is better): $-BIC$
+		\end{itemize}
+\end{itemize}
+
+\section{Clustering}
+\begin{itemize}
+	\item Analyze the spacial relationship between data points to predict decision attribute
+	\item k-means clustering:
+		\begin{itemize}
+			\item Must know $k$ (number of clusters) beforehand.
+			\item Pick $k$ datapoints at random. These are the centers for each cluster. 
+			\item Place each datapoint in the cluster whose center it is closest to.
+			\item Calculate the center of each cluster (average of each coordinate).
+			\item Reclassify datapoints based on new centers.
+			\item Repeat the last two steps until no datapoints change clusters on reclassification.
 		\end{itemize}
 \end{itemize}
 
