@@ -1,0 +1,8 @@
+{
+	"configs" : {
+		"base" : {
+			"location" : "/home/ubuntu/src/data-mining-notes",
+			"script" : "./compile.sh"
+		}
+	}
+}
