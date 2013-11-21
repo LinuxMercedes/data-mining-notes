@@ -146,6 +146,18 @@
 			\item Each connected group of core points becomes one cluster
 			\item Assign border points to the closest cluster
 		\end{itemize}
+	\item Centroid-Based Clustering: Self Organizing Maps
+		\begin{itemize}
+			\item Neurons are the centroids of each cluster
+			\item Neurons organized into a grid based on the distance between then
+			\item Maps higher-dimensional data to lower-dimensional grid
+			\item Let $m_1, m_2, \cdots, m_k$ be the centroids
+			\item For instance $p$, the activated neuron is the closest neuron to $p$
+			\item $dist( (x_1, y_1), (x_2, y_2) ) = ( (x_1 - x_2), (y_1 - y_2) )$
+			\item Let $h_j$ be a learning rate function that usually varies based on closeness of $m_j$ to other centroids and reduces over time
+			\item Updating centroid: $m_j = m_j + (h_j * dist(p, m_j))$
+			\item Centroids are organized in grid to minimize the total distance between each centroid and its neighbors
+		\end{itemize}
 \end{itemize}
 
 \end{document}
