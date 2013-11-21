@@ -116,6 +116,36 @@
 			\item Reclassify datapoints based on new centers.
 			\item Repeat the last two steps until no datapoints change clusters on reclassification.
 		\end{itemize}
+	\item Hierarchical/Agglomerative Clustering
+		\begin{itemize}
+			\item Initially each item is in its own cluster
+			\item Pick the two closest clusters and merge them 
+			\item Repeat until there is only one cluster
+			\item Maintain a tree showing cluster merges
+		\end{itemize}
+	\item Measuring Distance Between Clusters
+		\begin{itemize}
+			\item Single-linkage: distance between closest members of C1 and C2
+			\item Complete-linkage: distance between farthest members of C1 and C2
+			\item Centroid-linkage: distance between centroids of C1 and C2
+			\item Average-linkage: average distance between members of C1 and C2
+			\item Average-linkage considered the best distance measurement
+		\end{itemize}
+	\item Probabilistic Clustering: Expectation Maximization
+		\begin{itemize}
+			\item Compute expected values of cluster assignments
+			\item Re-estimate model parameters to maximize probability of current assignments
+			\item Repeat
+		\end{itemize}
+	\item Density-Based Clustering: DBSCAN
+		\begin{itemize}
+			\item Core Point: Point with \geq maxPoints points within \epsilon distance from it
+			\item Border Point: Point within distance \epsilon of a core point
+			\item Noise Point: Point that is neither core nor border
+			\item For core points within \epsilon of each other, create an edge betwen them
+			\item Each connected group of core points becomes one cluster
+			\item Assign border points to the closest cluster
+		\end{itemize}
 \end{itemize}
 
 \end{document}
