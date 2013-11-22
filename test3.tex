@@ -21,18 +21,41 @@
 		\end{itemize}
 	\item {\bf Akaike Information Criterion (AIC)}:
 		\begin{itemize}
-			\item ALC = MLC - $S$
+			\item $ALC = MLC - S$
 			\item $S$ = \# parameters (i.e., \# independent estimates in probability tables) = sum over each table of (\# entries - \# entries in last column of table)
 		\end{itemize}
 	\item {\bf Bayesian Information Criterion (BIC)}:
 		\begin{itemize}
-			\item BIC = MLC - $(0.5)(log_2 N)(S)$
+			\item $BIC = MLC - (0.5)(log_2 N)(S)$
 			\item $N$ = \# instances in dataset
 		\end{itemize}
 	\item {\bf Minimum Description Length (MDL)}:
 		\begin{itemize}
-			\item MDL = $-$BIC
+			\item $MDL = -BIC$
 		\end{itemize}
+	\item {\bf Clustering}: Analyzing spatial distribution of instances to predict decision attribute (or to detect associations between attributes).
+	\item {\bf K-means Clustering}: K data instances initially chosen as cluster centers, other instances assigned to clusters based on their distance to centers, new cluster centers found, process repeats until clusters stabilize
+	\item {\bf Optimal Clustering}: We want points in a cluster to be:
+		\begin{itemize}
+			\item As similar as possible to other points in same cluster
+			\item As different as possible from points in another cluster
+		\end{itemize}
+	\item {\bf Single-Linkage}: Distance between closest members of $C_1$ and $C_2$ (centroids are kind of an artificial notion, not necessarily actual instances from the data set).
+	\item {\bf Average-Linkage}: Average distance between each pair of members in $C_1$ and $C_2$. 
+		\begin{itemize}
+			\item Considered the best (there are some other variations based on this).
+		\end{itemize}
+	\item {\bf Density-Based Clustering}: Locate regions of high density that are separated from other regions of low density.
+		\begin{itemize}
+			\item WARNING: Not good for high-dimensionality (i.e., lots of attributes), and/or significantly varying densities
+		\end{itemize}
+	\item {\bf Density of Particular instance in dataset} (i.e., a point): \# points within specified radius  $\epsilon$ of that point, including the point itself.
+		\begin{numerate}
+			\item {\bf Core Point}: Point in the interior of a dense region; point whose density >= user_specified parameter min pts.
+			\item {\bf Border Point}: Point on the edge of a dense region; point that is not a Core point, but falls within the neighborhood of a Core point (neighborhood means you?re within distance $\epsilon$).
+			\item {\bf Noise (Background) Point}: Point in a sparsely occupied region; any point that is neither a Core or Border point. 
+		\end{numerate}
+	
 \end{itemize}
 
 \section{Algorithms}
