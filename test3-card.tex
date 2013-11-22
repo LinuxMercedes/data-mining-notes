@@ -1,4 +1,4 @@
-\documentclass[fontsize=4pt, twocolumn]{scrartcl}
+\documentclass[fontsize=4pt]{scrartcl}
 
 \usepackage[
 	paperwidth=6in, 
@@ -11,12 +11,19 @@
 	bottom=0.5in,
 ]{geometry}
 
+\usepackage{multicol}
+\setlength{\columnsep}{1pt}
+
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
 \pagenumbering{gobble}
 
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep}
+
 \begin{document}
+\begin{multicols}{3}
 \section{Definitions}
 
 \begin{itemize}
@@ -269,5 +276,6 @@ achieve), and
 		\end{itemize}
 	\item Stacking: Like bagging and boosting, but works with different types of classifiers
 \end{itemize}
+\end{multicols}{3}
 \end{document}
 
