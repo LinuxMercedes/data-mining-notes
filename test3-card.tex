@@ -23,6 +23,10 @@
 \setlist[itemize]{itemsep=-2pt, itemindent=0pt, leftmargin=*}
 \setlist[enumerate]{itemsep=-2pt, itemindent=0pt, leftmargin=*}
 
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{-2pt}{-2pt}{-2pt}
+\titlespacing{\subsection}{-2pt}{-2pt}{-2pt}
+
 \DeclareMathSizes{3pt}{3pt}{3pt}{3pt}
 
 \begin{document}
@@ -40,63 +44,19 @@
 		\begin{itemize}
 			\item {\bf "Kernel Trick"}: instead of using dot product between 2 vectors, use a kernel function
 		\end{itemize}
-	\item {\bf Bayesian Networks}: Probabilistic model that represents a set of random variables their conditional probabilities via a directed acyclic graph (DAG).
-		\begin{itemize}
-			\item {\bf NOTE}: Nodes which are not connected represent variables that are (conditionally) independent of each other.
-		\end{itemize}
-	\item {\bf Akaike Information Criterion (AIC)}:
-		\begin{itemize}
-			\item $ALC = MLC - S$
-			\item $S$ = \# parameters (i.e., \# independent estimates in probability tables) = sum over each table of (\# entries - \# entries in last column of table)
-		\end{itemize}
-	\item {\bf Bayesian Information Criterion (BIC)}:
-		\begin{itemize}
-			\item $BIC = MLC - (0.5)(log_2 N)(S)$
-			\item $N$ = \# instances in dataset
-		\end{itemize}
-	\item {\bf Minimum Description Length (MDL)}:
-		\begin{itemize}
-			\item $MDL = -BIC$
-		\end{itemize}
 	\item {\bf Clustering}: Analyzing spatial distribution of instances to predict decision attribute (or to detect associations between attributes).
-	\item {\bf K-means Clustering}: K data instances initially chosen as cluster centers, other instances assigned to clusters based on their distance to centers, new cluster centers found, process repeats until clusters stabilize
 	\item {\bf Optimal Clustering}: We want points in a cluster to be:
 		\begin{itemize}
 			\item As similar as possible to other points in same cluster
 			\item As different as possible from points in another cluster
 		\end{itemize}
-	\item {\bf Single-Linkage}: Distance between closest members of $C_1$ and $C_2$ (centroids are kind of an artificial notion, not necessarily actual instances from the data set).
-	\item {\bf Average-Linkage}: Average distance between each pair of members in $C_1$ and $C_2$. 
-		\begin{itemize}
-			\item Considered the best (there are some other variations based on this).
-		\end{itemize}
-	\item {\bf Density-Based Clustering}: Locate regions of high density that are separated from other regions of low density.
-		\begin{itemize}
-			\item WARNING: Not good for high-dimensionality (i.e., lots of attributes), and/or significantly varying densities
-		\end{itemize}
-	\item {\bf Density of Particular instance in dataset} (i.e., a point): \# points within specified radius  $\epsilon$ of that point, including the point itself.
-		\begin{enumerate}
-			\item {\bf Core Point}: Point in the interior of a dense region; point whose density $\geq$ user-specified parameter min pts.
-			\item {\bf Border Point}: Point on the edge of a dense region; point that is not a Core point, but falls within the neighborhood of a Core point (neigh
-			\item {\bf Noise (Background) Point}: Point in a sparsely occupied region; any point that is neither a Core or Border point. 
-		\end{enumerate}
-	\item {\bf Variance}: May be lower if you run the model of multiple (independent training datasets), and take the average over those error rates.
-	\item {\bf Bias}: May be lower if you build multiple models (using independent training datasets), and take the average over those error rates. 
-	\item {\bf Bias-Variance Decomposition}: Will have better value than that of any single model.
-	\item {\bf Noise}: Could have caused errors; less chance of it doing so if you run it multiple times with different training datasets.
 	\item Necessary conditions for ensemble classifier to perform better than single classifier:
 		\begin{enumerate}
 			\item Base classifiers should be independent of each other (in practice this is hard to 
 achieve), and
 			\item Base classifiers should do better than a classifier that performs the same as using random guessing.
 		\end{enumerate}
- 	\item Necessary conditions for ensemble classifier to perform better than single classifier:
-		\begin{enumerate}
-			\item Base classifiers should be independent of each other (in practice this is hard to 
-achieve), and
-			\item Base classifiers should be better than a classified that performs the same as using random guessing
-		\end{enumerate}
-\end{itemize}
+ \end{itemize}
 
 \section{Algorithms}
 
@@ -142,7 +102,6 @@ achieve), and
 	\item Disconnected nodes are independent
 	\item Each node is a probability function that takes as inputs the values of its parent nodes
 	\item Node interpreted as: What is the probability of this node being true, given that parent1, parent2, \ldots have particular values?
-	\item $P(G = T | R = T) = \frac{P(G = T) P(R = T)}{P(G = T)}$
 	\item Bayes' Rule: $P(H | E) = \frac{P(E | H) P(H)}{P(E)}$
 	\item Categorizing a new instance:
 		\begin{itemize}
@@ -223,6 +182,7 @@ achieve), and
 		\end{itemize}
 	\item Density-Based Clustering: DBSCAN
 		\begin{itemize}
+			\item WARNING: Not good for high-dimensionality (i.e., lots of attributes), and/or significantly varying densities
 			\item Core Point: Point with $\geq$ maxPoints points within $\epsilon$ distance from it
 			\item Border Point: Point within distance $\epsilon$ of a core point
 			\item Noise Point: Point that is neither core nor border
@@ -269,6 +229,6 @@ achieve), and
 		\end{itemize}
 	\item Stacking: Like bagging and boosting, but works with different types of classifiers
 \end{itemize}
-\end{multicols}{3}
+\end{multicols}
 \end{document}
 
