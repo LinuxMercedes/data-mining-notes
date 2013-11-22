@@ -1,0 +1,259 @@
+\documentclass{article}
+
+\begin{document}
+\pdfpagewidth 5in
+\pdfpageheight 3in
+\section{Definitions}
+
+\begin{itemize}
+	\item {\bf Support Vector Machines (SVMs)}: Draw lines between things.
+	\item {\bf Hyperplane}: Plane (or line if 2D space) that separates positive and negative instances in a dataset.
+	\item {\bf Support Vectors}: Elements of the dataset that would change the position of the dividing line if they were removed.
+		\begin{itemize}
+			\item {\bf NOTE}: Moving a support vector moves the decision boundary.
+		\end{itemize} 
+	\item {\bf Kernel Functions}: Used to transform data into another (possibly higher) dimensional space so that the data can become more easily separated or better structured (e.g., "linear kernel" would just keep data in 2D).
+		\begin{itemize}
+			\item {\bf "Kernel Trick"}: instead of using dot product between 2 vectors, use a kernel function
+		\end{itemize}
+	\item {\bf Bayesian Networks}: Probabilistic model that represents a set of random variables their conditional probabilities via a directed acyclic graph (DAG).
+		\begin{itemize}
+			\item {\bf NOTE}: Nodes which are not connected represent variables that are (conditionally) independent of each other.
+		\end{itemize}
+	\item {\bf Akaike Information Criterion (AIC)}:
+		\begin{itemize}
+			\item $ALC = MLC - S$
+			\item $S$ = \# parameters (i.e., \# independent estimates in probability tables) = sum over each table of (\# entries - \# entries in last column of table)
+		\end{itemize}
+	\item {\bf Bayesian Information Criterion (BIC)}:
+		\begin{itemize}
+			\item $BIC = MLC - (0.5)(log_2 N)(S)$
+			\item $N$ = \# instances in dataset
+		\end{itemize}
+	\item {\bf Minimum Description Length (MDL)}:
+		\begin{itemize}
+			\item $MDL = -BIC$
+		\end{itemize}
+	\item {\bf Clustering}: Analyzing spatial distribution of instances to predict decision attribute (or to detect associations between attributes).
+	\item {\bf K-means Clustering}: K data instances initially chosen as cluster centers, other instances assigned to clusters based on their distance to centers, new cluster centers found, process repeats until clusters stabilize
+	\item {\bf Optimal Clustering}: We want points in a cluster to be:
+		\begin{itemize}
+			\item As similar as possible to other points in same cluster
+			\item As different as possible from points in another cluster
+		\end{itemize}
+	\item {\bf Single-Linkage}: Distance between closest members of $C_1$ and $C_2$ (centroids are kind of an artificial notion, not necessarily actual instances from the data set).
+	\item {\bf Average-Linkage}: Average distance between each pair of members in $C_1$ and $C_2$. 
+		\begin{itemize}
+			\item Considered the best (there are some other variations based on this).
+		\end{itemize}
+	\item {\bf Density-Based Clustering}: Locate regions of high density that are separated from other regions of low density.
+		\begin{itemize}
+			\item WARNING: Not good for high-dimensionality (i.e., lots of attributes), and/or significantly varying densities
+		\end{itemize}
+	\item {\bf Density of Particular instance in dataset} (i.e., a point): \# points within specified radius  $\epsilon$ of that point, including the point itself.
+		\begin{enumerate}
+			\item {\bf Core Point}: Point in the interior of a dense region; point whose density $\geq$ user-specified parameter min pts.
+			\item {\bf Border Point}: Point on the edge of a dense region; point that is not a Core point, but falls within the neighborhood of a Core point (neigh
+			\item {\bf Noise (Background) Point}: Point in a sparsely occupied region; any point that is neither a Core or Border point. 
+		\end{enumerate}
+	\item {\bf Variance}: May be lower if you run the model of multiple (independent training datasets), and take the average over those error rates.
+	\item {\bf Bias}: May be lower if you build multiple models (using independent training datasets), and take the average over those error rates. 
+	\item {\bf Bias-Variance Decomposition}: Will have better value than that of any single model.
+	\item {\bf Noise}: Could have caused errors; less chance of it doing so if you run it multiple times with different training datasets.
+	\item Necessary conditions for ensemble classifier to perform better than single classifier:
+		\begin{enumerate}
+			\item Base classifiers should be independent of each other (in practice this is hard to 
+achieve), and
+			\item Base classifiers should do better than a classifier that performs the same as using random guessing.
+		\end{enumerate}
+ 	\item Necessary conditions for ensemble classifier to perform better than single classifier:
+		\begin{enumerate}
+			\item Base classifiers should be independent of each other (in practice this is hard to 
+achieve), and
+			\item Base classifiers should be better than a classified that performs the same as using random guessing
+		\end{enumerate}
+\end{itemize}
+
+\section{Algorithms}
+
+\subsection{Support Vector Machines}
+\begin{itemize}
+	\item Assume that decision attribute is binary
+	\item Hyperplane: plane that separates positive and negative instances in dataset
+	\item Support vectors: data points (actual instances) that define the hyperplane and maximizes the distance between the hyperplane and support vectors
+	\item Example:
+		\begin{itemize}
+			\item Let support vectors be $s_1$, $s_2$, $s_3$ and the decision attribute for each be $d_1$, $d_2$, $d_3$
+			\item $\alpha_1 \phi(s_1) \bullet \phi(s_1) + \alpha_2 \phi(s_2) \bullet \phi(s_1) + \alpha_3 \phi(s_3) \bullet \phi(s_1) = d_1$
+			\item $\alpha_1 \phi(s_1) \bullet \phi(s_2) + \alpha_2 \phi(s_2) \bullet \phi(s_2) + \alpha_3 \phi(s_3) \bullet \phi(s_2) = d_1$
+			\item $\alpha_1 \phi(s_1) \bullet \phi(s_3) + \alpha_2 \phi(s_2) \bullet \phi(s_3) + \alpha_3 \phi(s_3) \bullet \phi(s_3) = d_1$
+			\item Solve for $\alpha_1$, $\alpha_2$, $\alpha_3$
+			\item Hyperplane is $w' = \alpha_1 s_1 + \alpha_2 s_2 + \alpha_3 s_3$
+			\item $\phi$ is the identity function for a linear SVM (i.e.\ the hyperplane is a linear plane/line)
+		\end{itemize}
+	\item $\phi$
+		\begin {itemize}
+		  \item TODO: read the book and pull more clear info from it for this section
+			\item Allows mapping from nonlinear ``input space'' to linear ``feature space'' where we perform the classification
+			\item Find a ``kernel function'' to transform (possibly higher dimensionality data) into a space such that it is better structured (and thus more easily classified)
+			\item ``Kernel Trick'': use a kernel function instead of bullet product between vectors
+			\item Example kernel functions:
+				\begin{itemize}
+					\item Polynomial Learning Machine: $K(x, y) = (x \bullet y + 1) ^ p$
+					\item Radial-Basis Function (or Gaussian) Network: $K(x, y) = \frac {exp\{-||x - y||^2\}} {2\sigma^2}$
+					\item Sigmoid (or Neural Net Activation) Network: $K(x, y) = tanh(\kappa x \bullet y - \delta)$
+				\end{itemize}
+		\end{itemize}
+	\item Classifying new instances:
+		\begin{itemize}
+			\item Let $v$ be the new vector to classify
+			\item Let $n$ = \# support vectors
+			\item Let \begin{displaymath}
+					\sigma(x) = \left\{
+					\begin{array}{lr}
+						positive & : x >= 0 \\
+						negative & : x < 0
+					\end{array}
+					\right.
+				\end{displaymath}
+			\item Compute $f(v) = \sigma(\sum_{i=1}^{n} \alpha_i \phi(s_i) \bullet \phi(v) )$
+		\end{itemize}
+\end{itemize}
+
+\subsection{Bayesian Networks}
+\begin{itemize}
+	\item Probabilistic model representing random variables and the relationships between them in a DAG.
+	\item Disconnected nodes are independent
+	\item Each node is a probability function that takes as inputs the values of its parent nodes
+	\item Node interpreted as: What is the probability of this node being true, given that parent1, parent2, \ldots have particular values?
+	\item $P(G = T | R = T) = \frac{P(G = T) P(R = T)}{P(G = T)}$
+	\item Bayes' Rule: $P(H | E) = \frac{P(E | H) P(H)}{P(E)}$
+	\item TODO: Laplace Estimation
+	\item TODO: Probability Calculation
+	\item Categorizing a new instance:
+		\begin{itemize}
+			\item Calculate probability for each node based on instance values
+			\item Calculate probability of each possible decision attribute value based on node values
+			\item Normalize resulting probabilities ($P(this) / \sum P(each\ value)$)
+		\end{itemize}
+	\item Prior Knowledge Algorithm: Adding edges to Bayesian Networks
+		\begin{itemize}
+			\item Let $T = (X_1, X_2, \cdots, X_n)$ be an ordering of attributes
+			\item For $j = 1$ to $n$:
+			\item Let $S = T[1 $to$ j - 1]$ (the attributes that precede $T[j]$)
+			\item Remove attributes from $S$ that do not affect $T[j]$ based on prior/domain-specific Knowledge
+			\item Create an edge from every element in $S$ to $T[j]$
+		\end{itemize}
+	\item K2: Adding edges to Bayesian Networks
+		\begin{itemize}
+			\item Process each node in order and greedily considers adding edges from previously processed nodes to current node.
+			\item In each step, add the edges that maximize the node's score, optionally limiting to a set number of parents
+			\item Dependent on initial ordering of nodes, so running on different orderings is recommended
+			\item Score for node $i$:
+				\begin{itemize}
+					\item Let $V_i$ be the possible values for node $i$
+					\item Let $\pi_i$ be the parents of node $i$
+					\item Let $\theta_i$ be all attribute-value pairs in $\pi_i$
+					\item Let $\alpha_{ijk}$ be the number of instances where attribute $x_i$ has value $V_i[k]$ and the attributes in $\pi_i$ have the values in $\theta_i[j]$
+					\item Let $N_{ij}$ be the sum of the number of instances that have values matching an entry in $\theta_i$
+					\item If $\theta_i = \emptyset$, $N_{ij} = \sum_{k=1}^{|V_i|} \alpha_{ijk}$
+					\item $f(i, \pi_i) = \prod_{j=1}^{|\theta_i|} 	\frac{(|V_i| - 1)!}{N_{ij} + |V_i| - 1)!} \prod_{k=1}^{|V_i|} \alpha_{ijk}! $
+				\end{itemize}
+			\item K2 Variations:
+				\begin{itemize}
+					\item Markov Blanket: Make a supernode containing node x (the decision node), node x's parents, and node x's children, and their parents.
+					\item Start with a given network and consider adding, deleting, or switching directions of edges between arbitrary nodes
+				\end{itemize}
+		\end{itemize}
+	\item Scoring Bayesian Networks:
+		\begin{itemize}
+			\item Maximum Likelyhood Criterion (bigger is better): $\sum_{i=1}^{attributes}\sum_{j=1}^{|\theta_i|}\sum_{k=1}^{|V_i|} \alpha_{ijk} log \frac{\alpha_{ijk}}{N_ {ij}}$
+			\item Akaike Information Criterion (smaller is better): $MLC - \#paramenters$
+			\item Bayesian Information Criterion (bigger is better): $MLC - 0.5 * log_2(\#instances) * \#parameters$
+			\item Minimum Description Length (smaller is better): $-BIC$
+		\end{itemize}
+\end{itemize}
+
+\subsection{Clustering}
+\begin{itemize}
+	\item Analyze the spacial relationship between data points to predict decision attribute
+	\item k-means clustering:
+		\begin{itemize}
+			\item Must know $k$ (number of clusters) beforehand.
+			\item Pick $k$ datapoints at random. These are the centers for each cluster. 
+			\item Place each datapoint in the cluster whose center it is closest to.
+			\item Calculate the center of each cluster (average of each coordinate).
+			\item Reclassify datapoints based on new centers.
+			\item Repeat the last two steps until no datapoints change clusters on reclassification.
+		\end{itemize}
+	\item Hierarchical/Agglomerative Clustering
+		\begin{itemize}
+			\item Initially each item is in its own cluster
+			\item Pick the two closest clusters and merge them 
+			\item Repeat until there is only one cluster
+			\item Maintain a tree showing cluster merges
+		\end{itemize}
+	\item Measuring Distance Between Clusters
+		\begin{itemize}
+			\item Single-linkage: distance between closest members of C1 and C2
+			\item Complete-linkage: distance between farthest members of C1 and C2
+			\item Centroid-linkage: distance between centroids of C1 and C2
+			\item Average-linkage: average distance between members of C1 and C2
+			\item Average-linkage considered the best distance measurement
+		\end{itemize}
+	\item Probabilistic Clustering: Expectation Maximization
+		\begin{itemize}
+			\item Compute expected values of cluster assignments
+			\item Re-estimate model parameters to maximize probability of current assignments
+			\item Repeat
+		\end{itemize}
+	\item Density-Based Clustering: DBSCAN
+		\begin{itemize}
+			\item Core Point: Point with $\geq$ maxPoints points within $\epsilon$ distance from it
+			\item Border Point: Point within distance $\epsilon$ of a core point
+			\item Noise Point: Point that is neither core nor border
+			\item For core points within $\epsilon$ of each other, create an edge betwen them
+			\item Each connected group of core points becomes one cluster
+			\item Assign border points to the closest cluster
+		\end{itemize}
+	\item Centroid-Based Clustering: Self Organizing Maps
+		\begin{itemize}
+			\item Neurons are the centroids of each cluster
+			\item Neurons organized into a grid based on the distance between then
+			\item Maps higher-dimensional data to lower-dimensional grid
+			\item Let $m_1, m_2, \cdots, m_k$ be the centroids
+			\item For instance $p$, the activated neuron is the closest neuron to $p$
+			\item $dist( (x_1, y_1), (x_2, y_2) ) = ( (x_1 - x_2), (y_1 - y_2) )$
+			\item Let $h_j$ be a learning rate function that usually varies based on closeness of $m_j$ to other centroids and reduces over time
+			\item Updating centroid: $m_j = m_j + (h_j * dist(p, m_j))$
+			\item Centroids are organized in grid to minimize the total distance between each centroid and its neighbors
+		\end{itemize}
+\end{itemize}
+
+\subsection{Ensemble Methods}
+\begin{itemize}
+	\item Variance: Model's accuracy error rate due to the training data set
+	\item Bias: Model's accuracy error rate due to the classification method
+	\item Bias-Variance Decomposition: Bias + Variance
+	\item Work based on training several classifiers on different training datasets
+	\item Bagging (Bootstrap Aggregating):
+		\begin{itemize}
+			\item Train $k$ classifiers
+			\item Each classifier trains on dataset of size $N$, each element chosen with replacement from the dataset
+			\item $N$ is usually 63\% of $|D|$
+		\end{itemize}
+	\item Boosting: Adaptively change training instance distribution to better classify hard instances
+		\begin{itemize}
+			\item Each instance has a weight; if it is misclassified, weight increases, otherwise weight decreases.
+			\item Initial weight $w_j = 1/N$
+			\item $e_i$ = weighted error for classifier $C_i$
+			\item If $e_i \geq 0.5$, the error rate is terrible and we reset the weights
+			\item $\alpha_i = 0.5 * ln( (1 - e_i) / e_i)$
+			\item $Z_j$ is a factor to ensure $\sum_{j=1}^{N} w_j = 1$
+			\item If classified correctly, $w_j = (w_j / Z_j) * e ^ {-\alpha_i}$
+			\item If not, $w_j = (w_j / Z_j) * e ^ {+\alpha_i}$
+		\end{itemize}
+	\item Stacking: Like bagging and boosting, but works with different types of classifiers
+\end{itemize}
+\end{document}
+
