@@ -12,7 +12,7 @@
 ]{geometry}
 
 \usepackage{multicol}
-\setlength{\columnsep}{1pt}
+\setlength{\columnsep}{0pt}
 
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
@@ -20,7 +20,8 @@
 \pagenumbering{gobble}
 
 \usepackage{enumitem}
-\setlist[itemize]{noitemsep}
+\setlist[itemize]{noitemsep, itemindent=0pt, leftmargin=*}
+\setlist[enumerate]{noitemsep, itemindent=0pt, leftmargin=*}
 
 \begin{document}
 \begin{multicols}{3}
