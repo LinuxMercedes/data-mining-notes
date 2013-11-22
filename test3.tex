@@ -4,6 +4,18 @@
 
 \section{Definitions}
 
+\being{itemize}
+	\item {\bf Support Vector Machines (SVMs)}: Draw lines between things.
+	\item {\bf Hyperplane}: Plane (or line if 2D space) that separates positive and negative instances in a dataset.
+	\item {\bf Support Vectors}: Elements of the dataset that would change the position of the dividing line if they were removed.
+		\begin{itemize}
+			\item NOTE: Moving a support vector moves the decision boundary.
+		\end{itemize} 
+	\item {\bf Kernel Functions}: Used to transform data into another (possibly higher) dimensional space so that the data can become more easily separated or better structured (e.g., ?linear kernel? would just keep data in 2D).
+		\begin{itemize}
+			\item {\bf ?Kernel Trick?}: instead of using dot product between 2 vectors, use a kernel function
+		\end{itemize}
+
 \section{Algorithms}
 
 \subsection{Support Vector Machines}
@@ -25,7 +37,7 @@
 		\begin {itemize}
 		  \item TODO: read the book and pull more clear info from it for this section
 			\item Allows mapping from nonlinear ``input space'' to linear ``feature space'' where we perform the classification
-			\item Find a ``kernel function'' to transform (possibly higher dimesionality data) into a space such that it is better structured (and thus more easily classified)
+			\item Find a ``kernel function'' to transform (possibly higher dimensionality data) into a space such that it is better structured (and thus more easily classified)
 			\item ``Kernel Trick'': use a kernel function instead of bullet product between vectors
 			\item Example kernel functions:
 				\begin{itemize}
