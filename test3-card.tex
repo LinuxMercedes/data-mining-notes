@@ -12,7 +12,7 @@
 ]{geometry}
 
 \usepackage{multicol}
-\setlength{\columnsep}{0pt}
+\setlength{\columnsep}{1pt}
 
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
@@ -24,8 +24,8 @@
 \setlist[enumerate]{itemsep=-2pt, itemindent=0pt, leftmargin=*}
 
 \usepackage[compact]{titlesec}
-\titlespacing{\section}{-2pt}{-2pt}{-2pt}
-\titlespacing{\subsection}{-2pt}{-2pt}{-2pt}
+\titlespacing{\section}{-1pt}{-1pt}{-1pt}
+\titlespacing{\subsection}{-1pt}{-1pt}{-1pt}
 
 \DeclareMathSizes{3pt}{3pt}{3pt}{3pt}
 
@@ -130,7 +130,7 @@ achieve), and
 					\item Let $\alpha_{ijk}$ be the number of instances where attribute $x_i$ has value $V_i[k]$ and the attributes in $\pi_i$ have the values in $\theta_i[j]$
 					\item Let $N_{ij}$ be the sum of the number of instances that have values matching an entry in $\theta_i$
 					\item If $\theta_i = \emptyset$, $N_{ij} = \sum_{k=1}^{|V_i|} \alpha_{ijk}$
-					\item $f(i, \pi_i) = \prod_{j=1}^{|\theta_i|} 	\frac{(|V_i| - 1)!}{N_{ij} + |V_i| - 1)!} \prod_{k=1}^{|V_i|} \alpha_{ijk}! $
+					\item \[f(i, \pi_i) = \prod_{j=1}^{|\theta_i|} 	\frac{(|V_i| - 1)!}{N_{ij} + |V_i| - 1)!} \prod_{k=1}^{|V_i|} \alpha_{ijk}!\]
 				\end{itemize}
 			\item K2 Variations:
 				\begin{itemize}
@@ -140,7 +140,7 @@ achieve), and
 		\end{itemize}
 	\item Scoring Bayesian Networks:
 		\begin{itemize}
-			\item Maximum Likelyhood Criterion (bigger is better): $\sum_{i=1}^{attributes}\sum_{j=1}^{|\theta_i|}\sum_{k=1}^{|V_i|} \alpha_{ijk} log \frac{\alpha_{ijk}}{N_ {ij}}$
+			\item Maximum Likelyhood Criterion (bigger is better): \[\sum_{i=1}^{attributes}\sum_{j=1}^{|\theta_i|}\sum_{k=1}^{|V_i|} \alpha_{ijk} log \frac{\alpha_{ijk}}{N_ {ij}}\]
 			\item Akaike Information Criterion (smaller is better): $MLC - \#paramenters$
 			\item Bayesian Information Criterion (bigger is better): $MLC - 0.5 * log_2(\#instances) * \#parameters$
 			\item Minimum Description Length (smaller is better): $-BIC$
