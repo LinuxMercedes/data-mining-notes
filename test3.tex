@@ -55,7 +55,22 @@
 			\item {\bf Border Point}: Point on the edge of a dense region; point that is not a Core point, but falls within the neighborhood of a Core point (neigh
 			\item {\bf Noise (Background) Point}: Point in a sparsely occupied region; any point that is neither a Core or Border point. 
 		\end{enumerate}
-	
+	\item {\bf Variance}: May be lower if you run the model of multiple (independent training datasets), and take the average over those error rates.
+	\item {\bf Bias}: May be lower if you build multiple models (using independent training datasets), and take the average over those error rates. 
+	\item {\bf Bias-Variance Decomposition}: Will have better value than that of any single model.
+	\item {\bf Noise}: Could have caused errors; less chance of it doing so if you run it multiple times with different training datasets.
+	\item Necessary conditions for ensemble classifier to perform better than single classifier:
+		\begin{enumerate}
+			\item Base classifiers should be independent of each other (in practice this is hard to 
+achieve), and
+			\item Base classifiers should do better than a classifier that performs the same as using random guessing.
+		\end{enumerate}
+ 	\item Necessary conditions for ensemble classifier to perform better than single classifier:
+		\begin{enumerate}
+			\item Base classifiers should be independent of each other (in practice this is hard to 
+achieve), and
+			\item Base classifiers should be better than a classified that performs the same as using random guessing
+		\end{enumerate}
 \end{itemize}
 
 \section{Algorithms}
